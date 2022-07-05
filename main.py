@@ -2,4 +2,7 @@ from Bank import Bank
 from UI import UI
 
 bank = Bank()
-UI.show_start_page(bank)
+ui = UI()
+ui.show_clients(bank.clients)
+ui.show_start_page(bank)
+ui.show_clients(bank.clients)

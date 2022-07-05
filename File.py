@@ -1,5 +1,12 @@
+import pickle
+
 class FileWritter:
     def save_clients(clients):
-        with open('clients.txt', 'w') as file:
-            for client in clients:
-                file.write(f'{client.name}, {client.login}, {client.id}')
+        f = open("clients.pickle", "wb")
+        pickle.dump(clients, f)
+
+    def read_clients():
+        f = open("clients.pickle", "rb")
+        clients = pickle.load(f)
+        return clients
+
