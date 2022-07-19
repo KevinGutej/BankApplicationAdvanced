@@ -1,10 +1,9 @@
-import uuid
-
 class Client:
-    def __init__(self, name, login,password):
+    def __init__(self, name, login,password,account):
         self.name = name
         self.login = login
-        self.id = uuid.uuid1()
+        self.account = account
         self.password = password
+        self.balance = 0
 
 
