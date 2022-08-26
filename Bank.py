@@ -18,6 +18,9 @@ class Bank:
                 temp_client = client
         return temp_client
 
+    def update_clients(self):
+        FileWritter.save_clients(self.clients)
+
     @staticmethod
     def account_number_gen(clients):
         while True:

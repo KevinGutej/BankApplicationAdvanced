@@ -9,26 +9,26 @@ class UI:
         print("***************MAIN MENU********************")
         if self.logged_user:
             print(f" Currently logged: {self.logged_user} ")
+            client = bank.get_client(self.logged_user)
+            print(f" Your balance: {client.balance} ")
+            print(f" Your account number: {client.account} ")
+            print("[4] - Pay In")
+            print("[5] - Pay out")
         else:
             print(f" Currently logged: Offline ")
+            print("[1] - Login in")
+            print("[2] - Sign Up")
 
-        print("[1] - Login in")
-        print("[2] - Sign Up")
         print("[3] - Exit")
 
+
         while True:
-            choice = input("Please a option: ")
+            choice = input("Please enter your choice: ")
             if choice.isdigit():
-                if int(choice) > 0 and int(choice) < 4:
+                if int(choice) > 0 and int(choice) < 6:
                     return int(choice)
             else:
                 print("Please enter again")
-
-        print('______________________________________________________________________________________________')
-        print("Do you have a account?")
-        account = input("Y / N: ")
-        if account == 'Y':
-            UI.login(bank)
 
     def sign_up(self,bank):
         name = input("Please enter your name: ")
@@ -59,6 +59,14 @@ class UI:
         for client in clients:
             print(f"Name: {client.name}, Login: {client.login}")
 
+    def pay_in(self,bank):
+        client = bank.get_client(self.logged_user)
+        amount = input("How much money would you like to pay in: ")
+        client.pay_in(int(amount))
+        bank.update_clients()
 
-
-
+    def pay_out(self,bank):
+        client = bank.get_client(self.logged_user)
+        amount = input("How much money would you like to pay out: ")
+        client.pay_out(int(amount))
+        bank.update_clients()
