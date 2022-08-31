@@ -37,3 +37,22 @@ class Bank:
                 return number
 
 
+
+    def get_client_by_account_number(self,account_number):
+        temp_client = None
+        for client in self.clients:
+            if account_number == client.account:
+                temp_client = client
+        return temp_client
+
+
+    def is_money_transfered(self,account_number,money_amount,logged_user):
+        sender = self.get_client(logged_user)
+        if sender.balance < money_amount:
+            return False
+        else:
+            reciver = self.get_client_by_account_number(account_number)
+            reciver.pay_in(money_amount)
+            sender.pay_out(money_amount)
+            FileWritter.save_clients(self.clients)
+            return True

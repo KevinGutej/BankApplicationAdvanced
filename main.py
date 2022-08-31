@@ -20,6 +20,8 @@ while True:
         ui.pay_in(bank)
     elif choice == 5:
         ui.pay_out(bank)
+    elif choice == 6:
+        ui.transfer_m(bank)
 
     choice = ui.show_start_page(bank)
 

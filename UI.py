@@ -14,6 +14,7 @@ class UI:
             print(f" Your account number: {client.account} ")
             print("[4] - Pay In")
             print("[5] - Pay out")
+            print("[6] - Transfer Money")
         else:
             print(f" Currently logged: Offline ")
             print("[1] - Login in")
@@ -25,7 +26,7 @@ class UI:
         while True:
             choice = input("Please enter your choice: ")
             if choice.isdigit():
-                if int(choice) > 0 and int(choice) < 6:
+                if int(choice) > 0 and int(choice) < 7:
                     return int(choice)
             else:
                 print("Please enter again")
@@ -68,5 +69,19 @@ class UI:
     def pay_out(self,bank):
         client = bank.get_client(self.logged_user)
         amount = input("How much money would you like to pay out: ")
-        client.pay_out(int(amount))
-        bank.update_clients()
+        is_payout = client.is_payout_succesful(int(amount))
+        if is_payout:
+            print("Succesful Transaction")
+            bank.update_clients()
+        else:
+            print("Transaction was not succesfu")
+
+
+    def transfer_m(self,bank):
+        money = int(input("How much money would you like to transfer?"))
+        account_number = input("Who would you like to transfer it to?")
+        is_money_transfered = bank.is_money_transfered(account_number=account_number,money_amount=money,logged_user=self.logged_user)
+        if is_money_transfered:
+            print("Succesful Transaction")
+        else:
+            print("Transaction was not succesful")
